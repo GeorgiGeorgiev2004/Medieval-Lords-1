@@ -1,4 +1,4 @@
-def Building():
+class Building():
     def __init__(self, name, price, expected_income, build_time):
         self.name = name
         self.price = price
