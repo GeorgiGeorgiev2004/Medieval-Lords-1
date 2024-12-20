@@ -1,4 +1,4 @@
-class Character():
+class Character:
     def __init__(self, first_name, last_name, age, gender, family, stats=None, title=None):
         self.first_name = first_name
         self.last_name = last_name
@@ -15,7 +15,7 @@ class Character():
         spouse_name = self.family.spouce.first_name if self.family.spouce else "Unknown"
         if self.title is None:
             self.title = f"{honorifics[1]} of the {self.family.spouce.title}"
-        print(f"{self.first_name} {self.last_name}, {self.title} of Conqueradia. "
+        print(f"{self.first_name} {self.last_name}, {self.title} of Conqueradia."
                 f"{honorifics[2]} of {parents_names}. "
                 f"{honorifics[0]} of {kids_names}. "
                 f"{honorifics[1]} of {spouse_name}.")
