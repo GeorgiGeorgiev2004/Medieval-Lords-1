@@ -3,7 +3,8 @@ import arcade
 import Common.Constants
 import ModelsForViews.Button as b
 
-class HorizontalScrollView(arcade.View):
+
+class PickTheSave(arcade.View):
     def __init__(self):
         super().__init__()
         self.buttons = []
@@ -18,7 +19,8 @@ class HorizontalScrollView(arcade.View):
         x_position = self.button_width // 2 + self.spacing
 
         for i in range(6):
-            self.buttons.append(b.Button(x_position, start_y, self.button_width, self.button_height, f"{i}",create_click_handler(i)))
+            self.buttons.append(
+                b.Button(x_position, start_y, self.button_width, self.button_height, f"{i}", create_click_handler(i)))
             x_position += self.button_width + self.spacing
 
         total_width = len(self.buttons) * (self.button_width + self.spacing) - self.spacing
@@ -27,7 +29,8 @@ class HorizontalScrollView(arcade.View):
     def on_draw(self):
         self.clear()
 
-        arcade.draw_rectangle_filled(self.window.width // 2, self.window.height // 2, self.window.width, self.window.height, arcade.color.LIGHT_GRAY)
+        arcade.draw_rectangle_filled(self.window.width // 2, self.window.height // 2, self.window.width,
+                                     self.window.height, arcade.color.LIGHT_GRAY)
 
         for button in self.buttons:
             button.draw_with_offset_x_axis(self.scroll_x)
@@ -43,17 +46,21 @@ class HorizontalScrollView(arcade.View):
                 btn.action_function()
                 break
 
+
 def create_click_handler(index):
     def click_handler():
         print(index)
+
     return click_handler
+
 
 def main():
     window = arcade.Window(Common.Constants.Screen.SCREEN_WIDTH, Common.Constants.Screen.SCREEN_HEIGHT, "title")
-    scroll_view = HorizontalScrollView()
+    scroll_view = PickTheSave()
     scroll_view.setup()
     window.show_view(scroll_view)
     arcade.run()
+
 
 if __name__ == "__main__":
     main()

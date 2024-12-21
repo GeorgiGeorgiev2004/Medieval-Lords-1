@@ -1,6 +1,7 @@
 from Models.Family import Family
 from Models.Character import Character
 
+
 def generateFighter():
     Viktor = Character(first_name="Viktor",
                        last_name="Victor",
@@ -13,13 +14,11 @@ def generateFighter():
                        last_name="Manolova",
                        age=22,
                        gender="F",
-                       family=Family(kids={},parents={})
+                       family=Family(kids={}, parents={})
                        )
     Viktor.family.spouce = spouce
     spouce.family.spouce = Viktor
     return Viktor
-
-
 
 
 char = generateFighter()

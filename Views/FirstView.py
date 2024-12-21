@@ -2,6 +2,8 @@ import arcade
 import Common.Constants
 
 SCREEN_TITLE = "TITLETESTAAAAAAAAAAAAAA"
+
+
 class MyGame(arcade.View):
     def __init__(self):
         super().__init__()
@@ -24,7 +26,7 @@ class MyGame(arcade.View):
         self.scene.add_sprite("Player", self.player_sprite)
 
         for x in range(0, 1250, 64):
-            wall = arcade.Sprite(":resources:images/tiles/grassMid.png",  Common.Constants.Scaling.TILE_SCALING)
+            wall = arcade.Sprite(":resources:images/tiles/grassMid.png", Common.Constants.Scaling.TILE_SCALING)
             wall.center_x = x
             wall.center_y = 32
             self.scene.add_sprite("Walls", wall)
@@ -34,7 +36,7 @@ class MyGame(arcade.View):
         for coordinate in coordinate_list:
             # Add a crate on the ground
             wall = arcade.Sprite(
-                ":resources:images/tiles/boxCrate_double.png",  Common.Constants.Scaling.TILE_SCALING
+                ":resources:images/tiles/boxCrate_double.png", Common.Constants.Scaling.TILE_SCALING
             )
             wall.position = coordinate
             self.scene.add_sprite("Walls", wall)
@@ -43,6 +45,7 @@ class MyGame(arcade.View):
         self.clear()
 
         self.scene.draw()
+
 
 def main():
     """Main function"""
