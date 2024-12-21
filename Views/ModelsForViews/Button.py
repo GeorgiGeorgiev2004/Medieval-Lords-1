@@ -14,12 +14,14 @@ class Button:
 
         arcade.draw_text(self.text, self.x, self.y, arcade.color.WHITE, font_size=18, anchor_x="center", anchor_y="center")
 
-    def draw_with_offset(self, scroll_x):
+    def draw_with_offset_x_axis(self, scroll_x):
         x = self.x - scroll_x
 
         arcade.draw_rectangle_filled(x, self.y, self.width, self.height, arcade.color.BLUE)
         arcade.draw_text(self.text, x, self.y, arcade.color.WHITE, font_size=18, anchor_x="center", anchor_y="center")
 
-    def is_clicked(self, x, y):
-        return (self.x - self.width / 2 < x < self.x + self.width / 2 and
+    def is_clicked(self, x, y, scroll_x=None):
+        if scroll_x is not None:
+            coord_x = self.x - scroll_x
+        return (coord_x - self.width / 2 < x < coord_x + self.width / 2 and
                 self.y - self.height / 2 < y < self.y + self.height / 2)

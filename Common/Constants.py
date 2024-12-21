@@ -12,5 +12,5 @@ class Button:
     BUTTON_SPACING = 20
 
 class CharacterCreator:
-    BUTTON_WIDTH = (Screen.SCREEN_WIDTH/5)*4
-    BUTTON_HEIGHT = (Screen.SCREEN_HEIGHT/5)*4
+    BUTTON_WIDTH = (Screen.SCREEN_WIDTH/5)*3
+    BUTTON_HEIGHT = (Screen.SCREEN_HEIGHT/5)*3

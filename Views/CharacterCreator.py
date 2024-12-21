@@ -1,3 +1,4 @@
+from functools import partial
 import arcade
 import Common.Constants
 import ModelsForViews.Button as b
@@ -17,7 +18,7 @@ class HorizontalScrollView(arcade.View):
         x_position = self.button_width // 2 + self.spacing
 
         for i in range(6):
-            self.buttons.append(b.Button(x_position, start_y, self.button_width, self.button_height,f"{i+1}" , self.on_button_click(i)))
+            self.buttons.append(b.Button(x_position, start_y, self.button_width, self.button_height, f"{i}",create_click_handler(i)))
             x_position += self.button_width + self.spacing
 
         total_width = len(self.buttons) * (self.button_width + self.spacing) - self.spacing
@@ -29,7 +30,7 @@ class HorizontalScrollView(arcade.View):
         arcade.draw_rectangle_filled(self.window.width // 2, self.window.height // 2, self.window.width, self.window.height, arcade.color.LIGHT_GRAY)
 
         for button in self.buttons:
-            button.draw_with_offset(self.scroll_x)
+            button.draw_with_offset_x_axis(self.scroll_x)
 
     def on_mouse_scroll(self, x, y, scroll_x, scroll_y):
         if scroll_y != 0:
@@ -40,12 +41,15 @@ class HorizontalScrollView(arcade.View):
         for btn in self.buttons:
             if btn.is_clicked(x, y, self.scroll_x):
                 btn.action_function()
+                break
 
-    def on_button_click(self, button_index):
-        print(f"Button {button_index + 1} clicked!")
+def create_click_handler(index):
+    def click_handler():
+        print(index)
+    return click_handler
 
 def main():
-    window = arcade.Window(800, 600, "Horizontal Scroll with Mouse Wheel Example")
+    window = arcade.Window(Common.Constants.Screen.SCREEN_WIDTH, Common.Constants.Screen.SCREEN_HEIGHT, "title")
     scroll_view = HorizontalScrollView()
     scroll_view.setup()
     window.show_view(scroll_view)
