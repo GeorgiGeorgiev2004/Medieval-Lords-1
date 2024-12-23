@@ -1,88 +1,60 @@
 import arcade
-import arcade.gui
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-SCREEN_TITLE = "Arcade Popup Menu Example"
+# Set up screen size and other constants
+SCREEN_WIDTH = 1800
+SCREEN_HEIGHT = 800
+SCREEN_TITLE = "Turn-Based System with Button Press"
 
-
-class PopupMenu(arcade.gui.UIBoxLayout):
-    def __init__(self, on_close_callback):
-        super().__init__()
-
-        self.on_close_callback = on_close_callback
-
-        # Create buttons for the popup menu
-        close_button = arcade.gui.UIFlatButton(text="Close Menu", width=200)
-        option_button = arcade.gui.UIFlatButton(text="Option 1", width=200)
-
-        # Add the buttons to the popup layout
-        self.add(option_button.with_space_around(bottom=10))
-        self.add(close_button.with_space_around(bottom=10))
-
-        # Attach event to the close button
-        @close_button.event("on_click")
-        def on_close_click(event):
-            self.on_close_callback()
-
+# Initialize game variables
+player_turn = True  # Starts with Player 1
 
 class MyGame(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-
-        # GUI Manager
-        self.manager = arcade.gui.UIManager()
-        self.manager.enable()
-
-        # Create a button to open the popup
-        open_button = arcade.gui.UIFlatButton(text="Open Menu", width=200)
-        self.manager.add(
-            arcade.gui.UIAnchorWidget(
-                anchor_x="center_x",
-                anchor_y="center_y",
-                child=open_button
-            )
-        )
-
-        # Attach event to the button
-        open_button.on_click = self.show_popup
-
-        # Placeholder for popup menu
-        self.popup = None
-
-    def show_popup(self, event):
-        if not self.popup:
-            # Create and add popup to UIManager
-            self.popup = PopupMenu(on_close_callback=self.close_popup)
-            self.manager.add(
-                arcade.gui.UIAnchorWidget(
-                    anchor_x="center_x",
-                    anchor_y="center_y",
-                    child=self.popup
-                )
-            )
-
-    def close_popup(self):
-        # Clear all UI elements and re-add the main button
-        self.manager.children.clear()
-        self.popup = None
-
-        # Re-add the main button after closing the popup
-        open_button = arcade.gui.UIFlatButton(text="Open Menu", width=200)
-        self.manager.add(
-            arcade.gui.UIAnchorWidget(
-                anchor_x="center_x",
-                anchor_y="center_y",
-                child=open_button
-            )
-        )
-        open_button.on_click = self.show_popup
+        self.player_1 = arcade.Sprite("E:\PythonProject\Medieval-Lords-1\Resources\Throne.png", scale=0.5)
+        self.player_2 = arcade.Sprite("E:\PythonProject\Medieval-Lords-1\Resources\Views\CharacterSelecter.png", scale=0.5)
 
     def on_draw(self):
-        self.clear()
-        self.manager.draw()
+        arcade.start_render()
+        # Draw the players
+        self.player_1.draw()
+        self.player_2.draw()
 
+        # Display whose turn it is
+        if player_turn:
+            arcade.draw_text("Player 1's Turn", 350, 550, arcade.color.WHITE, 24)
+        else:
+            arcade.draw_text("Player 2's Turn", 350, 550, arcade.color.WHITE, 24)
+
+    def on_update(self, delta_time):
+        pass  # No need to do anything here since turn switching is done via key press
+
+    def on_key_press(self, symbol, modifiers):
+        global player_turn
+
+        if symbol == arcade.key.W and player_turn:
+            # Player 1 moves up
+            self.player_1.center_y += 5
+        elif symbol == arcade.key.S and player_turn:
+            # Player 1 moves down
+            self.player_1.center_y -= 5
+        elif symbol == arcade.key.UP and not player_turn:
+            # Player 2 moves up
+            self.player_2.center_y += 5
+        elif symbol == arcade.key.DOWN and not player_turn:
+            # Player 2 moves down
+            self.player_2.center_y -= 5
+
+        # Switch turn on pressing Enter (for both players)
+        if symbol == arcade.key.ENTER:
+            self.switch_turn()
+
+    def switch_turn(self):
+        global player_turn
+        player_turn = not player_turn  # Switch the turn
+
+        # You can add additional actions when the turn switches, like sound effects or animations.
 
 if __name__ == "__main__":
-    app = MyGame()
+    game = MyGame()
     arcade.run()

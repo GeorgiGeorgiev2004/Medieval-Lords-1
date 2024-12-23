@@ -2,7 +2,7 @@ from Models.Choice import Choice
 from Models.Event import Event
 from Models.Trait import Trait
 import Services.ModelServices.CharacterService as smscs
-import Configuration.CharacterArchetypes
+import Configuration.CharacterConfiguration
 
 def display_event(event):
     print(event.description)

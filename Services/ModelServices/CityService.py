@@ -8,7 +8,7 @@ def show_pop(city):
 def show_city_buildings(city):
     print(city.buildings)
 
-def add_building(city,building):
+def add_building(city, building):
     if city.slots >= len(city.buildings):
         print(f"All {city.slots} city slots are full! Demolish a building or expand the city!")
     else:

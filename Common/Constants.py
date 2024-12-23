@@ -21,3 +21,12 @@ class DefaultValues:
     def_honorifics_M = ["Father", "Husband", "Son"]
     def_honorifics_F = ["Mother", "Wife", "Daughter"]
     title = "Sovereign"
+
+class Modifiers:
+    army_morale = "army_morale"
+    tax_income_mod = "tax_income_mod"
+    title = "title"
+    traits = "traits"
+    stats = "stats"
+    upkeep_cost = "upkeep_cost"
+    gold = "gold"

@@ -1,4 +1,5 @@
 from os.path import commonpath
+
 import Common.Constants
 
 class Character:
@@ -13,27 +14,26 @@ class Character:
            self.modifiers["honorifics"] = Common.Constants.DefaultValues.def_honorifics_M
         else:
             self.modifiers["honorifics"] = Common.Constants.DefaultValues.def_honorifics_F
-        self.modifiers["gold"] = 0
-        self.modifiers["army_morale"] = 1
-        self.modifiers["tax_income_mod"] = 1
-        self.modifiers["title"] = title
-        self.modifiers["traits"] = set()
-        self.modifiers["stats"] = {"administrative":0, "strength":0, "tactics":0, "infrastructural": 0, "knowledge":0}
-        self.modifiers["army_morale"] = 1
-        self.modifiers["upkeep_cost"] = 1
+        self.modifiers[Common.Constants.Modifiers.gold] = 0
+        self.modifiers[Common.Constants.Modifiers.army_morale] = 1
+        self.modifiers[Common.Constants.Modifiers.tax_income_mod] = 1
+        self.modifiers[Common.Constants.Modifiers.title] = title
+        self.modifiers[Common.Constants.Modifiers.traits] = set()
+        self.modifiers[Common.Constants.Modifiers.stats] = {"administrative":0, "strength":0, "tactics":0, "infrastructural": 0, "knowledge":0}
+        self.modifiers[Common.Constants.Modifiers.upkeep_cost] = 1
 
     def present_self(self):
         parents_names = ", ".join(
             [parent.first_name for parent in self.family.parents]) if self.family.parents else "Unknown"
         kids_names = ", ".join([child.first_name for child in self.family.kids]) if self.family.kids else "Unknown"
-        spouse_name = self.family.spouce.first_name if self.family.spouce else "Unknown"
+        spouse_name = self.family.spouse.first_name if self.family.spouse else "Unknown"
         honorifics = self.modifiers.get("honorifics", Common.Constants.DefaultValues.def_honorifics_M)
-        title = self.modifiers.get("title", Common.Constants.DefaultValues.title)
+        title = self.modifiers.get(Common.Constants.Modifiers.title, Common.Constants.DefaultValues.title)
 
         if title is None:
-            partner_title = self.family.spouce.modifiers.get("title", Common.Constants.DefaultValues.title)
-            self.modifiers["title"] = f"{honorifics[1]} of the {partner_title}"
-            title = self.modifiers.get("title", Common.Constants.DefaultValues.title)
+            partner_title = self.family.spouse.modifiers.get(Common.Constants.Modifiers.title, Common.Constants.DefaultValues.title)
+            self.modifiers[Common.Constants.Modifiers.title] = f"{honorifics[1]} of the {partner_title}"
+            title = self.modifiers.get(Common.Constants.Modifiers.title, Common.Constants.DefaultValues.title)
         print(f"{self.first_name} {self.last_name}, {title} of Conqueradia. "
               f"{honorifics[2]} of {parents_names} "
               f"{honorifics[0]} of {kids_names} "
