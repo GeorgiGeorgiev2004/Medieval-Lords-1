@@ -1,6 +1,7 @@
-import random
 from Models.Choice import Choice
 from Models.Event import Event
+from Models.Trait import Trait
+import Services.ModelServices.CharacterService as smscs
 import Configuration.CharacterArchetypes
 
 def display_event(event):
@@ -15,24 +16,24 @@ def pick_a_choice(character,event):
         if decision is x.text:
             print(f"{decision} selected!")
             handle_choice(character, event,i)
+            break
     else:
         print("No such option")
 
 def handle_choice(character, event, choice_ind):
     for key,value in event.choices[choice_ind].consequences.items():
         if key in character.modifiers.keys():
-            character.modifiers[key] += value
+            smscs.handle_modifiers(character, key, value)
         else:
             print(f"Lord we lack knowledge of: {key}")
 
+
 ev = Event(name="The king's new clothes",
            description="The king's description",
-           choices=[Choice(text='a',consequences= {"gold":35}), Choice(text="b",consequences={'Army-Morale':+0.3,"gold":-15})],
+           choices=[Choice(text='a',consequences= {"traits": Trait("Tr",("army_morale",0.1))}), Choice(text="b",consequences={'army_morale':+0.3,"gold":-15})],
            meantime=3,
            chain=None
            )
 
 chr = Configuration.CharacterArchetypes.generateFighter()
-print(chr.modifiers['gold'])
-print(pick_a_choice(chr, ev))
-print(chr.modifiers['gold'])
+(pick_a_choice(chr, ev))

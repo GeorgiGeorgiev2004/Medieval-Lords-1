@@ -17,6 +17,7 @@ def generateFighter():
                        )
     Viktor.family.spouce = spouce
     spouce.family.spouce = Viktor
+    Viktor.modifiers["gold"] = 11
     return Viktor
 
 
