@@ -7,7 +7,6 @@ def generateFighter():
                        last_name="Victor",
                        age=29,
                        gender="M",
-                       stats={4, 9},
                        family=Family(),
                        title="Emperor")
     spouce = Character(first_name="Ivana",

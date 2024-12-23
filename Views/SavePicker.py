@@ -20,7 +20,7 @@ class PickTheSave(arcade.View):
 
         for i in range(6):
             self.buttons.append(
-                b.Button(x_position, start_y, self.button_width, self.button_height, f"{i}", create_click_handler(i)))
+                b.Button(x_position, start_y, self.button_width, self.button_height, f"{i}", Click_Decor(i)))
             x_position += self.button_width + self.spacing
 
         total_width = len(self.buttons) * (self.button_width + self.spacing) - self.spacing
@@ -47,10 +47,9 @@ class PickTheSave(arcade.View):
                 break
 
 
-def create_click_handler(index):
+def Click_Decor(index):
     def click_handler():
         print(index)
-
     return click_handler
 
 

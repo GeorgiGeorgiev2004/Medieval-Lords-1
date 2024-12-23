@@ -16,3 +16,6 @@ class Button:
 class CharacterCreator:
     BUTTON_WIDTH = (Screen.SCREEN_WIDTH / 5) * 2
     BUTTON_HEIGHT = (Screen.SCREEN_HEIGHT / 5) * 4
+
+class DefaultValues:
+    def_honorifics = ["Father", "Husband", "Son"]

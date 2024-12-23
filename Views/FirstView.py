@@ -1,6 +1,6 @@
 import arcade
 import Common.Constants
-
+from arcade.gui import UIInputText,UIWidget
 SCREEN_TITLE = "TITLETESTAAAAAAAAAAAAAA"
 
 
@@ -15,7 +15,6 @@ class MyGame(arcade.View):
         """Set up the game here. Call this function to restart the game."""
 
         self.scene = arcade.Scene()
-
         self.scene.add_sprite_list("Player")
         self.scene.add_sprite_list("Walls", use_spatial_hash=True)
 

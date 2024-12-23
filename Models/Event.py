@@ -1,7 +1,7 @@
-class Event():
-    def __init__(self, name, description, choices_and_chances, meantime, chain):
+class Event:
+    def __init__(self, name, description, choices, meantime, chain):
         self.name = name
         self.description = description
-        self.choices_perc = choices_and_chances
+        self.choices = choices
         self.meantime = meantime
         self.chain = chain
