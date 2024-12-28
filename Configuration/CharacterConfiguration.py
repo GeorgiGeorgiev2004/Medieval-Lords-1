@@ -24,4 +24,5 @@ def generateFighter():
     Viktor.modifiers[md.traits] = set()
     Viktor.modifiers[md.stats] = {"administrative": 0, "strength": 0, "tactics": 0, "infrastructural": 0, "knowledge": 0}
     Viktor.modifiers[md.upkeep_cost] = 1
+
     return Viktor

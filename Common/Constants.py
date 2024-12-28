@@ -30,3 +30,8 @@ class Modifiers:
     stats = "stats"
     upkeep_cost = "upkeep_cost"
     gold = "gold"
+    stats_administrative = "administrative"
+    stats_strength = "strength"
+    stats_tactics = "tactics"
+    stats_infrastructural = "infrastructural"
+    stats_knowledge = "knowledge"
