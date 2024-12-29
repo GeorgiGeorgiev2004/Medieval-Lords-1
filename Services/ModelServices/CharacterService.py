@@ -1,11 +1,12 @@
-import Configuration.CharacterConfiguration
+import Configuration.CharacterConfiguration as cc
 from Common.Constants import Modifiers as ccm
+from Models.Character import Character
+
 
 def handle_modifiers(character, key, value):
-    modif_type = type(character.modifiers[key])
     if key == ccm.stats:
         _handle_modifiers_stats(character, key, value)
-    elif modif_type in [int, float]:
+    elif type(character.modifiers[key]) in [int, float]:
         _handle_modifiers_numerical(character, key, value)
     elif key == ccm.traits:
         _handle_modifiers_trait(character, value)
@@ -47,7 +48,7 @@ def calculate_modifiers(character):
     character.modifiers[ccm.army_morale] = calc_morale(character)
     character.modifiers[ccm.tax_income_mod] = calc_tax_mod(character)
     character.modifiers[ccm.upkeep_cost] = calc_upkeep(character)
-    
+
 def calc_morale(character):
     temp_morale = character.modifiers[ccm.army_morale]
     temp_morale += 0.025 * character.modifiers[ccm.stats][ccm.stats_strength]
@@ -68,3 +69,11 @@ def calc_upkeep(character):
     temp_upk += sum([trait.modifier_value[1] for trait in character.modifiers[ccm.traits] if
          trait.modif_flag is ccm.stats_tactics])
     return temp_upk
+
+def generate_heroes():
+    chars=[]
+    c = cc.generateFighter()
+    chars.append(c)
+    c = cc.generateAdministrator()
+    chars.append(c)
+    return chars

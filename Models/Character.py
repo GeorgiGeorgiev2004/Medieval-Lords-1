@@ -23,8 +23,10 @@ class Character:
         self.modifiers[Common.Constants.Modifiers.upkeep_cost] = 1
 
     def present_self(self):
-        parents_names = ", ".join(
+        parents_names = " and ".join(
             [parent.first_name for parent in self.family.parents]) if self.family.parents else "Unknown"
+        if not isinstance(self.family.kids, list):
+            self.family.kids = [self.family.kids]
         kids_names = ", ".join([child.first_name for child in self.family.kids]) if self.family.kids else "Unknown"
         spouse_name = self.family.spouse.first_name if self.family.spouse else "Unknown"
         honorifics = self.modifiers.get("honorifics", Common.Constants.DefaultValues.def_honorifics_M)
@@ -35,8 +37,8 @@ class Character:
             self.modifiers[Common.Constants.Modifiers.title] = f"{honorifics[1]} of the {partner_title}"
             title = self.modifiers.get(Common.Constants.Modifiers.title, Common.Constants.DefaultValues.title)
         print(f"{self.first_name} {self.last_name}, {title} of Conqueradia. "
-              f"{honorifics[2]} of {parents_names} "
-              f"{honorifics[0]} of {kids_names} "
-              f"{honorifics[1]} of {spouse_name} ")
+              f"{honorifics[2]} of {parents_names}, "
+              f"{honorifics[0]} of {kids_names}, "
+              f"{honorifics[1]} of {spouse_name}.")
 
 

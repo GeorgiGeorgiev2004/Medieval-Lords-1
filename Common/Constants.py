@@ -35,3 +35,7 @@ class Modifiers:
     stats_tactics = "tactics"
     stats_infrastructural = "infrastructural"
     stats_knowledge = "knowledge"
+
+
+class GameEssentials:
+    PLAYER_CHARACTER = None

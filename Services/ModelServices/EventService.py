@@ -5,6 +5,7 @@ import Services.ModelServices.CharacterService as smscs
 import Configuration.CharacterConfiguration
 
 def display_event(event):
+    print(event.name)
     print(event.description)
     for i in range(len(event.choices)):
         print(event.choices[i])
