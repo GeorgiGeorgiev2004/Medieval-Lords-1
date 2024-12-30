@@ -17,8 +17,9 @@ def _handle_modifiers_stats(character, kvp):
     print(character.modifiers[ccm.stats])
 
 def _handle_modifiers_numerical(character, key, value):
+    print(character.modifiers[key])
     character.modifiers[key] += value
-
+    print(character.modifiers[key])
 def _handle_modifiers_trait(character, value):
     ans = input(f"Did we gain or lose a trait? : Gain->Y, Lose -> N")
     if ans == "Y" or ans =="y":
@@ -34,7 +35,9 @@ def _handle_modifiers_trait(character, value):
             print("There is no trait to remove.")
 
 def _handle_modifiers_title(character, key, value):
+    print(character.modifiers[key])
     character.modifiers[key] = value
+    print(character.modifiers[key])
 
 def display_stats(character):
     tags = {}

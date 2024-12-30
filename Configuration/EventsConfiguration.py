@@ -1,6 +1,6 @@
 from Services.ModelServices import CharacterService as cs
 from Services.ModelServices import EventService as es
-from Models.Choice import Choice
+from Models.Choice import Choice, chance_the_choice
 from Models.Event import Event
 from Models.Trait import Trait
 from Common.Constants import Modifiers as ccm
@@ -41,7 +41,43 @@ e = Event(name = "Event2 - Heir found a purse",
                           other_char=ccge.PLAYER_CHARACTER.family.heir
                           )
                    ],
-          )
+          affected_characters=[])
 non_chain_events.append(e)
 
-(es.pick_a_choice(ccge.PLAYER_CHARACTER, non_chain_events[1]))
+e = Event(name = "Event3 - A transgression!",
+        description = "An orc warband is raiding a village in our territory! How should we deal with these monstrous beasts",
+        choices = [
+            Choice(
+                text='Send the army in to deal with the foul creatures',
+                consequences=chance_the_choice([
+                    ({'army_morale': +0.2, 'gold': +50}, 0.3),
+                    ({'army_morale': +0.1, 'gold': +20}, 0.5),
+                    ({'army_morale': -0.2, 'gold': -22}, 0.2)]),
+                flag=ccm.gold),
+            Choice(
+                text="Invest the found funds into your own education",
+                consequences={'army_morale':-0.2},
+                flag=ccm.army_morale),
+                   ],
+          affected_characters=[])
+non_chain_events.append(e)
+
+e = Event(name = "Event2 - Heir found a purse",
+        description = "Our heir seems to have a talent for managing funds!",
+        choices = [Choice(text='Obtain the coins!',
+                          consequences={'gold':+50},
+                          flag=ccm.gold),
+                   Choice(text="Invest the found funds into your own education",
+                          consequences={'stats':{ccm.stats_administrative:1}},
+                          flag=ccm.army_morale),
+                   Choice(text="Invest in our heir",
+                          consequences={'stats':{ccm.stats_administrative:1}},
+                          flag=ccm.army_morale,
+                          func_to_handle=cs.moddify_stat,
+                          other_char=ccge.PLAYER_CHARACTER.family.heir
+                          )
+                   ],
+          affected_characters=[])
+non_chain_events.append(e)
+
+(es.pick_a_choice(ccge.PLAYER_CHARACTER, non_chain_events[2]))
