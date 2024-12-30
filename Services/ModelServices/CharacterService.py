@@ -1,11 +1,9 @@
 import Configuration.CharacterConfiguration as cc
 from Common.Constants import Modifiers as ccm
-from Models.Character import Character
-
 
 def handle_modifiers(character, key, value):
     if key == ccm.stats:
-        _handle_modifiers_stats(character, key, value)
+        _handle_modifiers_stats(character,value)
     elif type(character.modifiers[key]) in [int, float]:
         _handle_modifiers_numerical(character, key, value)
     elif key == ccm.traits:
@@ -13,8 +11,9 @@ def handle_modifiers(character, key, value):
     elif key == ccm.title:
         _handle_modifiers_trait(character, value)
 
-def _handle_modifiers_stats(character, key, value):
-    character.modifiers[ccm.stats][key] += value
+def _handle_modifiers_stats(character, kvp):
+    temp = list(kvp.items())
+    character.modifiers[ccm.stats][temp[0][0]] += temp[0][1]
     print(character.modifiers[ccm.stats])
 
 def _handle_modifiers_numerical(character, key, value):
@@ -77,3 +76,13 @@ def generate_heroes():
     c = cc.generateAdministrator()
     chars.append(c)
     return chars
+
+ch = generate_heroes()
+print(ch[0].modifiers[ccm.stats][ccm.stats_strength])
+
+def moddify_stat(character, stat, x):
+    character.modifiers["stats"][stat] = character.modifiers["stats"][stat] + x
+
+moddify_stat(ch[0], ccm.stats_strength,4)
+print(ch[0].modifiers[ccm.stats][ccm.stats_strength])
+

@@ -5,4 +5,4 @@ class Trait:
         self.modif_flag = modif_flag
 
     def __repr__(self):
-        return f"{self.name} gives {self.modifier_value[0]} the effect {self.modifier_value[1]}"
+        return f"\"{self.name}\" gives {self.modifier_value[0]} the effect {self.modifier_value[1]}"

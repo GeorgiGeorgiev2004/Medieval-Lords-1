@@ -38,7 +38,6 @@ Papadopolu.modifiers[md.upkeep_cost] = 0.7
 
 #endregion
 
-
 def generateFighter():
     Viktor = Character(first_name="Viktor",
                        last_name="Victor",
@@ -60,10 +59,12 @@ def generateFighter():
                        age=6,
                        title="Heir",
                        gender="M",
-                       family=Family(kids={}, parents={Viktor,spouse})
+                       family=Family(parents={Viktor,spouse})
                        )
     Viktor.family.spouse = spouse
     spouse.family.spouse = Viktor
+    Viktor.family.kids.append(child)
+    spouse.family.kids.append(child)
 
     Viktor.modifiers[md.gold] = 80
     Viktor.modifiers[md.army_morale] = 1.2
@@ -94,7 +95,5 @@ def generateAdministrator():
 
     return smort
 
-ch = generateAdministrator()
+ch = generateFighter()
 ch.present_self()
-pap = ch.family.spouse
-pap.present_self()
