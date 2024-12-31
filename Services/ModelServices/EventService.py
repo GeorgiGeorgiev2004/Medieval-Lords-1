@@ -1,3 +1,4 @@
+import random
 from Models.Choice import Choice
 from Models.Event import Event
 from Models.Trait import Trait
@@ -12,7 +13,6 @@ def display_event(event):
         print(str(event.choices[i]))
 
 def pick_a_choice(character,event):
-    display_event(event)
     decision = input("Which option would your Majesty prefer?")
     for i, x in enumerate(event.choices):
         if decision == x.text:
@@ -32,13 +32,20 @@ def handle_choice(character, event, choice_ind):
             print(f"Lord we lack knowledge of: {key}")
 
 def generate_events():
-    """returns {event1:false},{event2:false},{event3:false}"""
-    events = es.get_events()
-    tukati_dukati = dict()
-    for event in events:
-        tukati_dukati[event] = False
-    return tukati_dukati
+    return es.get_events()
 
+def get_events_no_cooldown(events):
+    return [e for e in events if e.available is not False]
+
+def select_events_for_turn(events):
+    all_available_events = get_events_no_cooldown(events)
+    count =  random.randint(1, 3)
+    numbers = [random.randint(0, len(all_available_events)-1) for _ in range(count)]
+    result = list()
+    for i in range(count):
+        result.append(all_available_events[numbers[i]])
+        events[numbers[i]].available = False
+    return result
 
 ev = Event(name="The king's new clothes",
            description="The king's description",
@@ -46,3 +53,5 @@ ev = Event(name="The king's new clothes",
            meantime=3,
            chain=None
            )
+
+

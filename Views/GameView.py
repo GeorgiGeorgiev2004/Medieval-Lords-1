@@ -38,15 +38,22 @@ def char_selector():
             print(f"{x.first_name} selected!")
             play()
             return 0
-def play_turn():
 
-    pass
 
 def play():
-    events = es.generate_events()
+    events = es.get_events_no_cooldown(es.generate_events()) #Seems unsightly *level of abstraction*, maybe fix later
+    cmd = "AAA"
+    while cmd != "end":
+        play_turn(events)
+        ge.TURN = ge.TURN + 1
+        cmd = input("what now?")
 
-    play_turn()
-    ge.TURN = ge.TURN + 1
+
+def play_turn(events):
+    events_this_turn = es.select_events_for_turn(events)
+    for i in range(len(events_this_turn)):
+        es.display_event(events_this_turn[i])
+        es.pick_a_choice(ge.PLAYER_CHARACTER,events_this_turn[0])
     pass
 
 start_game()

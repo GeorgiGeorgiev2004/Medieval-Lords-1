@@ -7,12 +7,27 @@ class Choice:
         self.flag = flag
         self.func_to_handle = func_to_handle
         self.other_char = other_char
+        self.cons_textified=""
+        if isinstance(consequences, list):
+            mutability_gets_me_going = [""]
+            self.consequences = chance_the_choice(consequences,mutability_gets_me_going)
+            self.cons_textified = mutability_gets_me_going[0]
+
+        else:
+            self.consequences = consequences
+            self.cons_textified = ", ".join(f"{flag} with this -> {value}" for flag, value in self.consequences.items())
+
 
     def __repr__(self):
-        return f"{self.text} : with the consequences of maybe affecting your " + ", ".join(f"{flag} with this -> {value}" for flag, value in self.consequences.items())
+        return (f"{self.text} : with the consequences of affecting your \n" + self.cons_textified)
 
-def chance_the_choice(options):
+def chance_the_choice(options, field):
         """Takes [(conseq,chance),(conseq,chance),(conseq,chance),...]"""
+        arr = list()
+        for cons, chance in options:
+            temp = ", ".join(f"{flag} with this -> {value}" for flag, value in cons.items())
+            arr.append(temp)
+        field[0] = field[0] + " or \n".join(arr)
         zto = random.random()
         sum = 0
         for conseq, chance in options:
