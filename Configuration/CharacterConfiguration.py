@@ -2,6 +2,7 @@ from tempfile import SpooledTemporaryFile
 
 from Models.Family import Family
 from Models.Character import Character
+from Common.Constants import GameEssentials as ge
 from Common.Constants import Modifiers as md
 
 #region Papadopolu
@@ -72,6 +73,7 @@ def generateFighter():
     Viktor.modifiers[md.traits] = set()
     Viktor.modifiers[md.stats] = {"administrative": 2, "strength": 6, "tactics": 4, "infrastructural": 2, "knowledge": 1}
     Viktor.modifiers[md.upkeep_cost] = 1
+    Viktor.family.set_heir()
 
     return Viktor
 
@@ -92,8 +94,9 @@ def generateAdministrator():
     smort.modifiers[md.traits] = set()
     smort.modifiers[md.stats] = {"administrative": 6, "strength": 1, "tactics": 2, "infrastructural": 4, "knowledge": 3}
     smort.modifiers[md.upkeep_cost] = 0.8
-
+    smort.family.set_heir()
     return smort
 
 ch = generateFighter()
+ge.PLAYER_CHARACTER = ch
 ch.present_self()

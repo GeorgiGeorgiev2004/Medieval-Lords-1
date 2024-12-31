@@ -7,8 +7,6 @@ from Common.Constants import Modifiers as ccm
 from Common.Constants import GameEssentials as ccge
 
 chars = cs.generate_heroes()
-ccge.PLAYER_CHARACTER = chars[0]
-ccge.PLAYER_CHARACTER.family.set_heir()
 
 non_chain_events = []
 e = Event(name = "Event1 - Unruly noble",
@@ -123,4 +121,5 @@ e = Event(name = "Event7 - Meningit",
           affected_characters=[ccge.PLAYER_CHARACTER, ])
 non_chain_events.append(e)
 
-(es.pick_a_choice(ccge.PLAYER_CHARACTER, non_chain_events[6]))
+def get_events():
+    return non_chain_events

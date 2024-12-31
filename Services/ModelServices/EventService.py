@@ -2,7 +2,7 @@ from Models.Choice import Choice
 from Models.Event import Event
 from Models.Trait import Trait
 import Services.ModelServices.CharacterService as smscs
-import Configuration.CharacterConfiguration
+import Configuration.EventsConfiguration as es
 from Common.Constants import Modifiers as ccm
 
 def display_event(event):
@@ -30,6 +30,14 @@ def handle_choice(character, event, choice_ind):
             smscs.handle_modifiers(character, key, value)
         else:
             print(f"Lord we lack knowledge of: {key}")
+
+def generate_events():
+    """returns {event1:false},{event2:false},{event3:false}"""
+    events = es.get_events()
+    tukati_dukati = dict()
+    for event in events:
+        tukati_dukati[event] = False
+    return tukati_dukati
 
 
 ev = Event(name="The king's new clothes",

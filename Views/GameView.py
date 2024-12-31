@@ -1,5 +1,6 @@
 from Common.Constants import GameEssentials as ge
 from Services.ModelServices import CharacterService as cs
+from Services.ModelServices import EventService as es
 greet = """
 Fancy seeing you here future lord!
 What would you like to do now?
@@ -12,7 +13,6 @@ turn = ge.TURN
 game_state = {
     "turn":turn,
     "PLAYER_CHARACTER":ge.PLAYER_CHARACTER,
-
               }
 def start_game():
     cmd = input(greet)
@@ -38,8 +38,15 @@ def char_selector():
             print(f"{x.first_name} selected!")
             play()
             return 0
+def play_turn():
+
+    pass
 
 def play():
+    events = es.generate_events()
+
+    play_turn()
+    ge.TURN = ge.TURN + 1
     pass
 
 start_game()
