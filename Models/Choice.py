@@ -9,7 +9,7 @@ class Choice:
         self.other_char = other_char
 
     def __repr__(self):
-        return f"{self.text} with the consequences of affecting your " + ", ".join(f"{flag} with this -> {value}" for flag, value in self.consequences.items())
+        return f"{self.text} : with the consequences of maybe affecting your " + ", ".join(f"{flag} with this -> {value}" for flag, value in self.consequences.items())
 
 def chance_the_choice(options):
         """Takes [(conseq,chance),(conseq,chance),(conseq,chance),...]"""

@@ -1,4 +1,5 @@
 from os.path import commonpath
+from Models import Territory
 
 import Common.Constants
 
@@ -21,6 +22,7 @@ class Character:
         self.modifiers[Common.Constants.Modifiers.traits] = set()
         self.modifiers[Common.Constants.Modifiers.stats] = {"administrative":0, "strength":0, "tactics":0, "infrastructural": 0, "knowledge":0}
         self.modifiers[Common.Constants.Modifiers.upkeep_cost] = 1
+        self.governed_territory =  Territory.Territory()
 
     def present_self(self):
         parents_names = " and ".join(
@@ -36,9 +38,9 @@ class Character:
             partner_title = self.family.spouse.modifiers.get(Common.Constants.Modifiers.title, Common.Constants.DefaultValues.title)
             self.modifiers[Common.Constants.Modifiers.title] = f"{honorifics[1]} of the {partner_title}"
             title = self.modifiers.get(Common.Constants.Modifiers.title, Common.Constants.DefaultValues.title)
-        print(f"{self.first_name} {self.last_name}, {title} of Conqueradia. "
+        print(f"{self.first_name} {self.last_name}, {title} of {self.governed_territory}. "
               f"{honorifics[2]} of {parents_names}, "
               f"{honorifics[0]} of {kids_names}, "
               f"{honorifics[1]} of {spouse_name}.")
-
-
+        for key,value in self.modifiers.items():
+            print(str(key) + ": " + str(value))

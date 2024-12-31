@@ -9,7 +9,7 @@ def display_event(event):
     print(event.name)
     print(event.description)
     for i in range(len(event.choices)):
-        print(event.choices[i])
+        print(str(event.choices[i]))
 
 def pick_a_choice(character,event):
     display_event(event)

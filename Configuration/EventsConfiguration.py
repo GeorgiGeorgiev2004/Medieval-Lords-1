@@ -41,43 +41,86 @@ e = Event(name = "Event2 - Heir found a purse",
                           other_char=ccge.PLAYER_CHARACTER.family.heir
                           )
                    ],
-          affected_characters=[])
+          affected_characters=[ccge.PLAYER_CHARACTER.family.heir, ])
 non_chain_events.append(e)
 
 e = Event(name = "Event3 - A transgression!",
         description = "An orc warband is raiding a village in our territory! How should we deal with these monstrous beasts",
         choices = [
             Choice(
-                text='Send the army in to deal with the foul creatures',
+                text='Send the army in to deal with the foul creatures.',
                 consequences=chance_the_choice([
-                    ({'army_morale': +0.2, 'gold': +50}, 0.3),
+                    ({'army_morale': +0.2, 'gold': +50}, 0.2),
                     ({'army_morale': +0.1, 'gold': +20}, 0.5),
-                    ({'army_morale': -0.2, 'gold': -22}, 0.2)]),
+                    ({'army_morale': -0.2, 'gold': -22}, 0.3)]),
                 flag=ccm.gold),
             Choice(
-                text="Invest the found funds into your own education",
-                consequences={'army_morale':-0.2},
+                text="Ignore the danger!",
+                consequences={'army_morale':-0.2,"gold":-120},
                 flag=ccm.army_morale),
                    ],
           affected_characters=[])
 non_chain_events.append(e)
 
-e = Event(name = "Event2 - Heir found a purse",
-        description = "Our heir seems to have a talent for managing funds!",
-        choices = [Choice(text='Obtain the coins!',
-                          consequences={'gold':+50},
+e = Event(name = "Event4 - Take accountability?",
+        description = "Our heir seems to have a deeply rooted interest in your attention!",
+        choices = [Choice(text='Ignore the child',
+                          consequences={'gold':+70},
                           flag=ccm.gold),
-                   Choice(text="Invest the found funds into your own education",
-                          consequences={'stats':{ccm.stats_administrative:1}},
-                          flag=ccm.army_morale),
-                   Choice(text="Invest in our heir",
-                          consequences={'stats':{ccm.stats_administrative:1}},
-                          flag=ccm.army_morale,
+                   Choice(text="Start spending more time with the precious thing",
+                          consequences=chance_the_choice([
+                              ({'stats':{ccm.stats_administrative:1}}, 0.1),
+                              ({'stats':{ccm.stats_infrastructural:1}}, 0.3),
+                              ({'stats':{ccm.stats_tactics:1}}, 0.2),
+                              ({'stats':{ccm.stats_infrastructural:0}}, 0.4)]),
+                          flag=ccm.stats,
                           func_to_handle=cs.moddify_stat,
                           other_char=ccge.PLAYER_CHARACTER.family.heir
                           )
                    ],
-          affected_characters=[])
+          affected_characters=[ccge.PLAYER_CHARACTER.family.heir, ])
 non_chain_events.append(e)
 
-(es.pick_a_choice(ccge.PLAYER_CHARACTER, non_chain_events[2]))
+e = Event(name = "Event5 - Wisdom?",
+        description = "Having had a drink you ponder on what reality is.",
+        choices = [Choice(text="This really is an intricate ponder to have... mayhaps",
+                          consequences=chance_the_choice([
+                              ({'stats':{ccm.stats_knowledge:1}}, 0.5),
+                              ({'stats':{ccm.stats_knowledge:0}}, 0.5)]),
+                          flag=ccm.stats_knowledge,
+                          func_to_handle=cs.moddify_stat,
+                          other_char=ccge.PLAYER_CHARACTER
+                          )
+                   ],
+          affected_characters=[ccge.PLAYER_CHARACTER, ])
+non_chain_events.append(e)
+
+e = Event(name = "Event6 - The massage",
+        description = "After a night out with the fellow nobles a friend suggests visiting the massage salon!",
+        choices = [Choice(text="Hell yeah tone my MUSCLES sister!",
+                          consequences=chance_the_choice([
+                              ({'stats':{ccm.stats_strength:1},"gold":-20}, 0.5),
+                              ({'stats':{ccm.stats_strength:0},"gold":-20}, 0.5)]),
+                          flag=ccm.stats_strength,
+                          func_to_handle=cs.moddify_stat,
+                          other_char=ccge.PLAYER_CHARACTER
+                          )
+                   ],
+          affected_characters=[ccge.PLAYER_CHARACTER, ])
+non_chain_events.append(e)
+
+e = Event(name = "Event7 - Meningit",
+        description = "Vqtur me vee na bql kon!",
+        choices = [Choice(text="Yeah but I looked like a badass!",
+                          consequences=chance_the_choice([
+                              ({'stats':{ccm.stats_strength:-1},"gold":-20}, 0.5),
+                              ({'stats':{ccm.stats_strength:0},"gold":-20}, 0.5)]),
+                          flag=ccm.stats_strength,
+                          func_to_handle=cs.moddify_stat,
+                          other_char=ccge.PLAYER_CHARACTER
+                          )
+                   ],
+          affected_characters=[ccge.PLAYER_CHARACTER, ])
+non_chain_events.append(e)
+
+(es.pick_a_choice(ccge.PLAYER_CHARACTER, non_chain_events[6]))

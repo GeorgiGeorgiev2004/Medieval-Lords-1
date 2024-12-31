@@ -39,3 +39,4 @@ class Modifiers:
 
 class GameEssentials:
     PLAYER_CHARACTER = None
+    TURN=0
