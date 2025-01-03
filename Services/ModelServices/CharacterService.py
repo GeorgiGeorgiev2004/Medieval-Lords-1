@@ -81,12 +81,6 @@ def generate_heroes():
     chars.append(c)
     return chars
 
-ch = generate_heroes()
-print(ch[0].modifiers[ccm.stats][ccm.stats_strength])
-
 def moddify_stat(character, stat, x):
     character.modifiers["stats"][stat] = character.modifiers["stats"][stat] + x
-
-moddify_stat(ch[0], ccm.stats_strength,4)
-print(ch[0].modifiers[ccm.stats][ccm.stats_strength])
 

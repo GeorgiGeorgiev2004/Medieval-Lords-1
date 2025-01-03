@@ -6,12 +6,10 @@ class Scaling:
     CHARACTER_SCALING = 0.3
     TILE_SCALING = 0.5
 
-
 class Button:
     BUTTON_WIDTH = 200
     BUTTON_HEIGHT = 50
     BUTTON_SPACING = 20
-
 
 class CharacterCreator:
     BUTTON_WIDTH = (Screen.SCREEN_WIDTH / 5) * 2
@@ -36,7 +34,28 @@ class Modifiers:
     stats_infrastructural = "infrastructural"
     stats_knowledge = "knowledge"
 
-
 class GameEssentials:
     PLAYER_CHARACTER = None
     TURN=0
+
+class Text:
+    greet ="""
+Fancy seeing you here future lord!
+What would you like to do now?
+1) New Game
+2) Settings
+3) Saved Games
+4) Exit
+    """
+    text_base1 = """
+As it stands lord, you can choose your next activity:
+1) See to the visitor's demands
+2) View your territory
+3) Next turn!
+4) Save and Exit
+    """
+    text_base2 = """
+Would you like to answer the next person or switch your focus for now?
+1) See to the visitor's demands
+2) Go back!
+    """
