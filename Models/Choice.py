@@ -19,7 +19,10 @@ class Choice:
 
 
     def __repr__(self):
-        return (f"{self.text} : with the consequences of affecting your \n" + self.cons_textified)
+        person_name = "your"
+        if self.other_char is not None:
+            person_name = str(self.other_char.first_name) + "\'s"
+        return (f"{self.text} : with the consequences of affecting {person_name} \n" + self.cons_textified)
 
 def chance_the_choice(options, field):
         """Takes [(conseq,chance),(conseq,chance),(conseq,chance),...]"""

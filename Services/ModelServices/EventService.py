@@ -5,6 +5,7 @@ from Models.Trait import Trait
 import Services.ModelServices.CharacterService as smscs
 import Configuration.EventsConfiguration as es
 from Common.Constants import Modifiers as ccm
+import Models.CustomError as mc
 
 def display_event(event):
     print(event.name)
@@ -20,7 +21,8 @@ def pick_a_choice(character,event):
             handle_choice(character, event,i)
             break
     else:
-        print("No such option")
+        raise mc.BadAnswerError
+
 
 def handle_choice(character, event, choice_ind):
     if event.choices[choice_ind].other_char is not None:
@@ -40,7 +42,7 @@ def get_events_no_cooldown(events):
 def select_events_for_turn(events):
     all_available_events = get_events_no_cooldown(events)
     count =  random.randint(1, 3)
-    numbers = [random.randint(0, len(all_available_events)-1) for _ in range(count)]
+    numbers = random.sample(range(len(all_available_events)), count)
     result = list()
     for i in range(count):
         result.append(all_available_events[numbers[i]])
