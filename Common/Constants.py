@@ -38,6 +38,10 @@ class GameEssentials:
     PLAYER_CHARACTER = None
     TURN=0
 
+class CityAlgorithm:
+    START = 1
+    GROWTH_RATE = 0.5
+
 class Text:
     greet ="""
 Fancy seeing you here future lord!

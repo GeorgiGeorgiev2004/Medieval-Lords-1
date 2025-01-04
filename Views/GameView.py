@@ -55,6 +55,7 @@ def play_turn(events):
             ans = es.handle_events(events_this_turn)
             pass
         if cmd == "2":
+
             pass
         if cmd == "3":
             pass
