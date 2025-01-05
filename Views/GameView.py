@@ -3,6 +3,10 @@ from Services.ModelServices import CharacterService as cs
 from Services.ModelServices import EventService as es
 from Common.Constants import Text as t
 from Services.ModelServices import TerritoryService as ts
+import sys
+
+
+
 turn = ge.TURN
 game_state = {
     "turn":turn,
@@ -25,10 +29,12 @@ def start_game():
     return 0
 
 def play():
-    events = es.get_events_no_cooldown(es.generate_events()) #Seems unsightly *level of abstraction*, maybe fix later
     cmd = "AAA"
     while cmd != "end":
+        events = es.get_events_no_cooldown(es.generate_events())
         play_turn(events)
+        es.fix_events(events, turn)
+        game_state["events"] = events
         ge.TURN = ge.TURN + 1
         cmd = input("what now?")
 
@@ -44,13 +50,13 @@ def play_turn(events):
             ts.modify_terry()
             pass
         if cmd == "3":
-            pass
-        if cmd == "4":
             return 0
+        if cmd == "4":
+
+            sys.exit()
         if cmd == "stats":
             ge.PLAYER_CHARACTER.present_self()
         cmd = input(t.text_base1)
-
 start_game()
 
 

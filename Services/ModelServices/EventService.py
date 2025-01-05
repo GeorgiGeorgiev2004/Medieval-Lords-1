@@ -47,3 +47,8 @@ def handle_events(events_this_turn):
             ge.PLAYER_CHARACTER.present_self()
         cmd = input(t.text_base2)
     return 1
+
+def fix_events(events, turn):
+    for event in events:
+        if event.available_on_turn == turn:
+            event.available = True

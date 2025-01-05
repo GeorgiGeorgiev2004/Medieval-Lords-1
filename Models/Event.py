@@ -1,7 +1,7 @@
 import Common.Utility as cu
 
 class Event:
-    def __init__(self, name, description, choices, meantime=None, chain=None, affected_characters = [], available=True, available_on_turn=0,cooldown =2):
+    def __init__(self, name, description, choices, meantime=None, chain=None, affected_characters = [], available=True, available_on_turn=-2,cooldown =2):
         self.name = name
         self.description = description
         self.choices = choices

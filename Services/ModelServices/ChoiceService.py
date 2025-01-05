@@ -17,6 +17,7 @@ def pick_a_choice(character,event):
         if decision == x.text:
             print(f"{x.text} selected!")
             handle_choice(character, event,i)
+            event.available = False
             break
     else:
         raise mc.BadAnswerError
