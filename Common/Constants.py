@@ -38,6 +38,12 @@ class GameEssentials:
     PLAYER_CHARACTER = None
     TURN=0
 
+class SavedGames:
+    from pathlib import Path
+    FOLDER_PATH_STR = "E:\PythonProject\Medieval-Lords-1\Resources\Files\SaveFiles\\"
+    FOLDER_PATH = Path(FOLDER_PATH_STR)
+    SAVED_GAMES = len([f for f in FOLDER_PATH.iterdir() if f.is_file()])
+
 class CityAlgorithm:
     START = 1
     GROWTH_RATE = 0.5

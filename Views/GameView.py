@@ -2,7 +2,9 @@ from Common.Constants import GameEssentials as ge
 from Services.ModelServices import CharacterService as cs
 from Services.ModelServices import EventService as es
 from Common.Constants import Text as t
+from Common.Constants import SavedGames as sg
 from Services.ModelServices import TerritoryService as ts
+from Services.FileServices import FileService as fs
 import sys
 
 
@@ -23,7 +25,13 @@ def start_game():
     if cmd == "2":
         pass
     if cmd == "3":
-        pass
+        files = list(sg.FOLDER_PATH.iterdir())
+
+        file_list = [f.name for f in files if f.is_file()]
+        for f in file_list:
+            print(f)
+        cmd = input("Which savefile would you like to load up?")
+        game_state = fs.load_game(sg.FOLDER_PATH_STR + "\\" + cmd)
     if cmd == "4":
         return 0
     return 0
@@ -52,7 +60,7 @@ def play_turn(events):
         if cmd == "3":
             return 0
         if cmd == "4":
-
+            fs.save_game(game_state,sg.FOLDER_PATH+ fs.generate_file_name())
             sys.exit()
         if cmd == "stats":
             ge.PLAYER_CHARACTER.present_self()
