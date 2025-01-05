@@ -1,9 +1,9 @@
-from tempfile import SpooledTemporaryFile
-
 from Models.Family import Family
 from Models.Character import Character
 from Common.Constants import GameEssentials as ge
 from Common.Constants import Modifiers as md
+from Models.Territory import Territory
+import Configuration.CityConfiguration  as ccc
 
 #region Papadopolu
 Papadopolu = Character(first_name="Papadopolu",
@@ -74,7 +74,7 @@ def generateFighter():
     Viktor.modifiers[md.stats] = {"administrative": 2, "strength": 6, "tactics": 4, "infrastructural": 2, "knowledge": 1}
     Viktor.modifiers[md.upkeep_cost] = 1
     Viktor.family.set_heir()
-
+    Viktor.governed_territory = Territory(5, ccc.generate_cities_for_Viktor())
     return Viktor
 
 def generateAdministrator():
@@ -95,6 +95,7 @@ def generateAdministrator():
     smort.modifiers[md.stats] = {"administrative": 6, "strength": 1, "tactics": 2, "infrastructural": 4, "knowledge": 3}
     smort.modifiers[md.upkeep_cost] = 0.8
     smort.family.set_heir()
+    smort.governed_territory = Territory(10, ccc.generate_cities_for_Smort())
     return smort
 
 ch = generateFighter()

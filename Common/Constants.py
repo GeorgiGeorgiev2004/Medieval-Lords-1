@@ -63,3 +63,8 @@ Would you like to answer the next person or switch your focus for now?
 1) See to the visitor's demands
 2) Go back!
     """
+    modify_city_how = """
+The commands to use are :
+build
+destroy
+"""

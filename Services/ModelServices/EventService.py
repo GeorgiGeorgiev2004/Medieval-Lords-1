@@ -1,9 +1,5 @@
 import random
-from Models.Choice import Choice
-from Models.Event import Event
-from Models.Trait import Trait
 import Configuration.EventsConfiguration as es
-from Common.Constants import Modifiers as ccm
 import Models.CustomError as mc
 from Services.ModelServices import ChoiceService as cs
 from Common.Constants import GameEssentials as ge
@@ -47,5 +43,7 @@ def handle_events(events_this_turn):
                 print(bae._message)
         if cmd == "2":
             return 0
+        if cmd == "stats":
+            ge.PLAYER_CHARACTER.present_self()
         cmd = input(t.text_base2)
     return 1

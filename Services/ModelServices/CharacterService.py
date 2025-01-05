@@ -1,6 +1,7 @@
 import Configuration.CharacterConfiguration as cc
 from Common.Constants import Modifiers as ccm
-
+from Common.Constants import GameEssentials as ge
+from Services.ModelServices import CharacterService as cs
 def handle_modifiers(character, key, value):
     if key == ccm.stats:
         _handle_modifiers_stats(character,value)
@@ -83,4 +84,18 @@ def generate_heroes():
 
 def moddify_stat(character, stat, x):
     character.modifiers["stats"][stat] = character.modifiers["stats"][stat] + x
+    return 0
+
+def char_selector():
+    chars = cs.generate_heroes()
+    for i in range(len(chars)):
+        print(chars[i].present_self())
+    decision = input("Which character would you like?")
+    for i, x in enumerate(chars):
+        if decision == x.first_name:
+            ge.PLAYER_CHARACTER = x
+            print(f"{x.first_name} selected!")
+            return 1
+    else:
+        print("Opsa broski try again maybe?")
 
