@@ -1,9 +1,10 @@
 import random
-import Configuration.EventsConfiguration as es
-import Models.CustomError as mc
-from Services.ModelServices import ChoiceService as cs
-from Common.Constants import GameEssentials as ge
-from Common.Constants import Text as t
+import configuration.events_configuration as es
+import models.custom_error as mc
+from services.model_services import choice_service as cs
+from common.constants import GameEssentials as ge
+from common.constants import Text as t
+
 
 def display_event(event):
     print(event.name)
@@ -11,15 +12,18 @@ def display_event(event):
     for i in range(len(event.choices)):
         print(str(event.choices[i]))
 
+
 def generate_events():
     return es.get_events()
+
 
 def get_events_no_cooldown(events):
     return [e for e in events if e.available is not False]
 
+
 def select_events_for_turn(events):
     all_available_events = get_events_no_cooldown(events)
-    count =  random.randint(1, 3)
+    count = random.randint(1, 3)
     numbers = random.sample(range(len(all_available_events)), count)
     result = list()
     for i in range(count):
@@ -27,10 +31,11 @@ def select_events_for_turn(events):
         events[numbers[i]].available = False
     return result
 
+
 def handle_events(events_this_turn):
     print(f"You still have to answer to {len(events_this_turn)} more requests.")
     cmd = input(t.text_base2)
-    while cmd!= "2":
+    while cmd != "2":
         if len(events_this_turn) == 0:
             return 0
         if cmd == "1":
@@ -47,6 +52,7 @@ def handle_events(events_this_turn):
             ge.PLAYER_CHARACTER.present_self()
         cmd = input(t.text_base2)
     return 1
+
 
 def fix_events(events, turn):
     for event in events:

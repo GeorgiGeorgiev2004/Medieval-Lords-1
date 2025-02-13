@@ -8,11 +8,13 @@ SCREEN_TITLE = "Turn-Based System with Button Press"
 # Initialize game variables
 player_turn = True  # Starts with Player 1
 
+
 class MyGame(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
         self.player_1 = arcade.Sprite("E:\PythonProject\Medieval-Lords-1\Resources\Throne.png", scale=0.5)
-        self.player_2 = arcade.Sprite("E:\PythonProject\Medieval-Lords-1\Resources\Views\CharacterSelecter.png", scale=0.5)
+        self.player_2 = arcade.Sprite("E:\PythonProject\Medieval-Lords-1\Resources\Views\CharacterSelecter.png",
+                                      scale=0.5)
 
     def on_draw(self):
         arcade.start_render()
@@ -54,6 +56,7 @@ class MyGame(arcade.Window):
         player_turn = not player_turn  # Switch the turn
 
         # You can add additional actions when the turn switches, like sound effects or animations.
+
 
 if __name__ == "__main__":
     game = MyGame()

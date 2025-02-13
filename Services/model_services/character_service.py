@@ -1,10 +1,10 @@
-import Configuration.CharacterConfiguration as cc
-from Common.Constants import Modifiers as ccm
-from Common.Constants import GameEssentials as ge
-from Services.ModelServices import CharacterService as cs
+import configuration.character_configuration as cc
+from common.constants import Modifiers as ccm
+from common.constants import GameEssentials as ge
+
 def handle_modifiers(character, key, value):
     if key == ccm.stats:
-        _handle_modifiers_stats(character,value)
+        _handle_modifiers_stats(character, value)
     elif type(character.modifiers[key]) in [int, float]:
         _handle_modifiers_numerical(character, key, value)
     elif key == ccm.traits:
@@ -12,34 +12,39 @@ def handle_modifiers(character, key, value):
     elif key == ccm.title:
         _handle_modifiers_trait(character, value)
 
+
 def _handle_modifiers_stats(character, kvp):
     temp = list(kvp.items())
     character.modifiers[ccm.stats][temp[0][0]] += temp[0][1]
     print(character.modifiers[ccm.stats])
+
 
 def _handle_modifiers_numerical(character, key, value):
     print(character.modifiers[key])
     character.modifiers[key] += value
     print(character.modifiers[key])
 
+
 def _handle_modifiers_trait(character, value):
     ans = input(f"Did we gain or lose a trait? : Gain->Y, Lose -> N")
-    if ans == "Y" or ans =="y":
+    if ans == "Y" or ans == "y":
         if value in character.modifiers[ccm.traits]:
             print("This trait is already active.")
         else:
             character.modifiers[ccm.traits].add(value)
             print(character.modifiers[ccm.traits])
-    elif ans == "N" or ans =="n":
+    elif ans == "N" or ans == "n":
         if value in character.modifiers[ccm.traits]:
             character.modifiers[ccm.traits].remove(value)
         else:
             print("There is no trait to remove.")
 
+
 def _handle_modifiers_title(character, key, value):
     print(character.modifiers[key])
     character.modifiers[key] = value
     print(character.modifiers[key])
+
 
 def display_stats(character):
     tags = {}
@@ -48,46 +53,52 @@ def display_stats(character):
         tags[tag] = k
     print(character.modifiers[ccm.stats])
 
+
 def calculate_modifiers(character):
     character.modifiers[ccm.army_morale] = calc_morale(character)
     character.modifiers[ccm.tax_income_mod] = calc_tax_mod(character)
     character.modifiers[ccm.upkeep_cost] = calc_upkeep(character)
 
+
 def calc_morale(character):
     temp_morale = character.modifiers[ccm.army_morale]
     temp_morale += 0.025 * character.modifiers[ccm.stats][ccm.stats_strength]
     temp_morale += sum([trait.modifier_value[1] for trait in character.modifiers[ccm.traits] if
-         trait.modif_flag is ccm.stats_strength])
+                        trait.modif_flag is ccm.stats_strength])
     return temp_morale
+
 
 def calc_tax_mod(character):
     temp_adm = character.modifiers[ccm.tax_income_mod]
     temp_adm += 0.015 * character.modifiers[ccm.stats][ccm.stats_administrative]
     temp_adm += sum([trait.modifier_value[1] for trait in character.modifiers[ccm.traits] if
-         trait.modif_flag is ccm.stats_administrative])
+                     trait.modif_flag is ccm.stats_administrative])
     return temp_adm
+
 
 def calc_upkeep(character):
     temp_upk = character.modifiers[ccm.upkeep_cost]
     temp_upk += 0.015 * character.modifiers[ccm.stats][ccm.stats_tactics]
     temp_upk += sum([trait.modifier_value[1] for trait in character.modifiers[ccm.traits] if
-         trait.modif_flag is ccm.stats_tactics])
+                     trait.modif_flag is ccm.stats_tactics])
     return temp_upk
 
+
 def generate_heroes():
-    chars=[]
+    chars = []
     c = cc.generateFighter()
     chars.append(c)
     c = cc.generateAdministrator()
     chars.append(c)
     return chars
 
-def moddify_stat(character, stat, x):
+def modify_stat(character, stat, x):
     character.modifiers["stats"][stat] = character.modifiers["stats"][stat] + x
     return 0
 
+
 def char_selector():
-    chars = cs.generate_heroes()
+    chars = generate_heroes()
     for i in range(len(chars)):
         print(chars[i].present_self())
     decision = input("Which character would you like?")
@@ -98,4 +109,3 @@ def char_selector():
             return 1
     else:
         print("Opsa broski try again maybe?")
-

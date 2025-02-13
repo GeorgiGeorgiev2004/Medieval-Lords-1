@@ -6,5 +6,5 @@ class Family:
         self.heir = None
 
     def set_heir(self):
-        if self.kids is not None and len(self.kids) !=0:
+        if self.kids is not None and len(self.kids) != 0:
             self.heir = self.kids[0]

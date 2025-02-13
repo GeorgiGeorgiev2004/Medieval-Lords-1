@@ -1,7 +1,7 @@
 from functools import partial
 import arcade
-import Common.Constants
-import ModelsForViews.Button as b
+import common.constants
+import models_for_views.button as b
 
 
 class PickTheSave(arcade.View):
@@ -9,8 +9,8 @@ class PickTheSave(arcade.View):
         super().__init__()
         self.buttons = []
         self.scroll_x = 0
-        self.button_height = Common.Constants.CharacterCreator.BUTTON_HEIGHT
-        self.button_width = Common.Constants.CharacterCreator.BUTTON_WIDTH
+        self.button_height = common.constants.CharacterCreator.BUTTON_HEIGHT
+        self.button_width = common.constants.CharacterCreator.BUTTON_WIDTH
         self.spacing = 30
         self.max_scroll_x = 0
 
@@ -50,11 +50,12 @@ class PickTheSave(arcade.View):
 def Click_Decor(index):
     def click_handler():
         print(index)
+
     return click_handler
 
 
 def main():
-    window = arcade.Window(Common.Constants.Screen.SCREEN_WIDTH, Common.Constants.Screen.SCREEN_HEIGHT, "title")
+    window = arcade.Window(common.constants.Screen.SCREEN_WIDTH, common.constants.Screen.SCREEN_HEIGHT, "title")
     scroll_view = PickTheSave()
     scroll_view.setup()
     window.show_view(scroll_view)

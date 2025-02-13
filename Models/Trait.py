@@ -1,5 +1,5 @@
 class Trait:
-    def __init__(self,name, modifier_value, modif_flag):
+    def __init__(self, name, modifier_value, modif_flag):
         self.name = name
         self.modifier_value = modifier_value
         self.modif_flag = modif_flag

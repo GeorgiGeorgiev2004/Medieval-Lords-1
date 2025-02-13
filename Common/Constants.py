@@ -2,23 +2,28 @@ class Screen:
     SCREEN_WIDTH = 1000
     SCREEN_HEIGHT = 650
 
+
 class Scaling:
     CHARACTER_SCALING = 0.3
     TILE_SCALING = 0.5
+
 
 class Button:
     BUTTON_WIDTH = 200
     BUTTON_HEIGHT = 50
     BUTTON_SPACING = 20
 
+
 class CharacterCreator:
     BUTTON_WIDTH = (Screen.SCREEN_WIDTH / 5) * 2
     BUTTON_HEIGHT = (Screen.SCREEN_HEIGHT / 5) * 4
+
 
 class DefaultValues:
     def_honorifics_M = ["Father", "Husband", "Son"]
     def_honorifics_F = ["Mother", "Wife", "Daughter"]
     title = "Sovereign"
+
 
 class Modifiers:
     army_morale = "army_morale"
@@ -34,22 +39,26 @@ class Modifiers:
     stats_infrastructural = "infrastructural"
     stats_knowledge = "knowledge"
 
+
 class GameEssentials:
     PLAYER_CHARACTER = None
-    TURN=0
+    TURN = 0
+
 
 class SavedGames:
     from pathlib import Path
-    FOLDER_PATH_STR = "E:\PythonProject\Medieval-Lords-1\Resources\Files\SaveFiles\\"
+    FOLDER_PATH_STR = "E:\PythonProject\Medieval-Lords-1\\resources\\files\\save_files\\"
     FOLDER_PATH = Path(FOLDER_PATH_STR)
     SAVED_GAMES = len([f for f in FOLDER_PATH.iterdir() if f.is_file()])
+
 
 class CityAlgorithm:
     START = 1
     GROWTH_RATE = 0.5
 
+
 class Text:
-    greet ="""
+    greet = """
 Fancy seeing you here future lord!
 What would you like to do now?
 1) New Game

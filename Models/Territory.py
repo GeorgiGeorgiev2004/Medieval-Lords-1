@@ -4,4 +4,5 @@ class Territory:
         self.cities = existing_cities
 
     def __repr__(self):
-        return f"The territory can contain up to {self.city_slots} cities and the already existing ones are: "+", ".join([x.name for x in self.cities])
+        return f"The territory can contain up to {self.city_slots} cities and the already existing ones are: " + ", ".join(
+            [x.name for x in self.cities])

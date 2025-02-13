@@ -1,6 +1,7 @@
 import arcade
-import Common.Constants
-from arcade.gui import UIInputText,UIWidget
+import common.constants
+from arcade.gui import UIInputText, UIWidget
+
 SCREEN_TITLE = "TITLETESTAAAAAAAAAAAAAA"
 
 

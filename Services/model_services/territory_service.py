@@ -1,8 +1,11 @@
-from Common.Constants import GameEssentials as ge
-from Common.Constants import Text as t
-from Services.ModelServices import CityService as cs
+from common.constants import GameEssentials as ge
+from common.constants import Text as t
+from services.model_services import city_service as cs
+
+
 def display_terry(terry):
-    return f"In your territory that can contain {terry.city_slots} cities the currently avaluable are: " + ", ".join([str(x) for x in terry.cities])
+    return f"In your territory that can contain {terry.city_slots} cities the currently avaluable are: " + ", ".join(
+        [str(x) for x in terry.cities])
 
 
 def modify_terry():
