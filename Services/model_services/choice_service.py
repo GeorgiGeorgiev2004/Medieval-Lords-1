@@ -1,7 +1,6 @@
 import services.model_services.character_service as smscs
 import models.custom_error as mc
 
-
 def handle_choice(character, event, choice_ind):
     if event.choices[choice_ind].other_char is not None:
         character = event.choices[choice_ind].other_char
