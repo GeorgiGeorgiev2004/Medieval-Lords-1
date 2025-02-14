@@ -12,8 +12,6 @@ class TestTerryService(unittest.TestCase):
         self.mock_terry.cities[0].__str__.return_value = "Ahtopol"
         self.mock_terry.cities[1].__str__.return_value = "Vihren"
 
-
-
     def test_display_terry(self):
         expected_output = "In your territory that can contain 3 cities the currently avaluable are: Ahtopol, Vihren"
         self.assertEqual(t.display_terry(self.mock_terry), expected_output)

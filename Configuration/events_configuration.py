@@ -1,5 +1,5 @@
 from services.model_services import character_service as cs
-from models.choice import Choice, chance_the_choice
+from models.choice import Choice
 from models.event import Event
 from models.trait import Trait
 from common.constants import Modifiers as ccm
@@ -35,10 +35,10 @@ e = Event(name="Event2 - Heir found a purse",
                           consequences={'stats': {ccm.stats_administrative: 1}},
                           flag=ccm.army_morale,
                           func_to_handle=cs.modify_stat,
-                          other_char=ccge.PLAYER_CHARACTER.family.heir
+                          other_char=ccge.PLAYER_CHARACTER
                           )
                    ],
-          affected_characters=[ccge.PLAYER_CHARACTER.family.heir, ])
+          affected_characters=[ccge.PLAYER_CHARACTER, ])
 non_chain_events.append(e)
 
 e = Event(name="Event3 - A transgression!",
@@ -72,10 +72,10 @@ e = Event(name="Event4 - Take accountability?",
                               ({'stats': {ccm.stats_infrastructural: 0}}, 0.4)],
                           flag=ccm.stats,
                           func_to_handle=cs.modify_stat,
-                          other_char=ccge.PLAYER_CHARACTER.family.heir
+                          other_char=ccge.PLAYER_CHARACTER
                           )
                    ],
-          affected_characters=[ccge.PLAYER_CHARACTER.family.heir, ])
+          affected_characters=[ccge.PLAYER_CHARACTER, ])
 non_chain_events.append(e)
 
 e = Event(name="Event5 - Wisdom?",
