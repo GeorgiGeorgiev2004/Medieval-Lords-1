@@ -34,7 +34,6 @@ def add_building(city):
         ge.PLAYER_CHARACTER.modifiers[ccm.gold] -= buildings[ind].price
         city.buildings.append(buildings[ind])
 
-
 def remove_building(city):
     a = ge.PLAYER_CHARACTER
     print("Available buildings: " + ", ".join([str(x) for x in city.buildings]))
@@ -43,7 +42,6 @@ def remove_building(city):
         cmd = input("Which building would you like to remove?")
     ind = [x.name for x in city.buildings].index(cmd)
     city.buildings.remove(city.buildings[ind])
-
 
 def calculate_city_slots(steps, start=ca.START, growth_rate=ca.GROWTH_RATE):
     progression = [start]
@@ -58,5 +56,4 @@ def calculate_city_slots(steps, start=ca.START, growth_rate=ca.GROWTH_RATE):
 
 
 def create_city(name, pop, buildings):
-    slots = calculate_city_slots(pop)
     return c.City(name, pop, buildings)

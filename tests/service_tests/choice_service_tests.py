@@ -1,5 +1,4 @@
 import unittest
-from random import choice
 from unittest.mock import patch, MagicMock
 from services.model_services import choice_service as cs
 from configuration.character_configuration import generateAdministrator, generateFighter
