@@ -44,8 +44,6 @@ def play():
         es.fix_events(events, turn)
         game_state["events"] = events
         ge.TURN = ge.TURN + 1
-        cmd = input("what now?")
-
 
 def play_turn(events):
     events_this_turn = es.select_events_for_turn(events)

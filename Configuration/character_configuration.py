@@ -77,7 +77,7 @@ def generateFighter():
                                   "knowledge": 1}
     Viktor.modifiers[md.upkeep_cost] = 1
     Viktor.family.set_heir()
-    Viktor.governed_territory = Territory(5, ccc.generate_cities_for_Viktor())
+    Viktor.governed_territory = Territory(5, ccc.generate_cities_for_Viktor(), name="Conqverdia")
     return Viktor
 
 
@@ -99,7 +99,7 @@ def generateAdministrator():
     smort.modifiers[md.stats] = {"administrative": 6, "strength": 1, "tactics": 2, "infrastructural": 4, "knowledge": 3}
     smort.modifiers[md.upkeep_cost] = 0.8
     smort.family.set_heir()
-    smort.governed_territory = Territory(10, ccc.generate_cities_for_Smort())
+    smort.governed_territory = Territory(10, ccc.generate_cities_for_Smort(), name= "Smartovlandia")
     return smort
 
 
