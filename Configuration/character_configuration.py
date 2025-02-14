@@ -1,10 +1,10 @@
 from models.family import Family
 from models.character import Character
-from common.constants import GameEssentials as ge
 from common.constants import Modifiers as md
 from models.territory import Territory
 import configuration.city_configuration as ccc
-
+import  configuration.trait_configuration as tc
+traits = tc.generate_traits()
 # region Papadopolu
 Papadopolu = Character(first_name="Papadopolu",
                        last_name="Kirlipopodopolus",
@@ -95,14 +95,9 @@ def generateAdministrator():
     smort.modifiers[md.gold] = 170
     smort.modifiers[md.army_morale] = 0.7
     smort.modifiers[md.tax_income_mod] = 1.2
-    smort.modifiers[md.traits] = set()
+    smort.modifiers[md.traits] = set([traits[1]])
     smort.modifiers[md.stats] = {"administrative": 6, "strength": 1, "tactics": 2, "infrastructural": 4, "knowledge": 3}
     smort.modifiers[md.upkeep_cost] = 0.8
     smort.family.set_heir()
     smort.governed_territory = Territory(10, ccc.generate_cities_for_Smort(), name= "Smartovlandia")
     return smort
-
-
-ch = generateFighter()
-ge.PLAYER_CHARACTER = ch
-ch.present_self()

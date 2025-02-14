@@ -10,7 +10,7 @@ def handle_modifiers(character, key, value):
     elif key == ccm.traits:
         _handle_modifiers_trait(character, value)
     elif key == ccm.title:
-        _handle_modifiers_trait(character, value)
+        _handle_modifiers_title(character, value)
 
 
 def _handle_modifiers_stats(character, kvp):
